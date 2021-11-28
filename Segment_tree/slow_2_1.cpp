@@ -5,9 +5,9 @@ using namespace std;
 const int MAX_N = 1e3; // The solution is slow so it isn't reasonable to create a bigger array
 int arr[MAX_N + 2]; // Add two so it doesn't overflow
 
-void edit(int pos, int val);
+void edit(int, int);
 
-int sum(int start, int end);
+int sum(int, int);
 
 int main() {
 	int N;
