@@ -45,6 +45,6 @@ void edit(int pos, int val) {
 
 int sum(int start, int end) {
 	int sum = 0;
-	for (int i = start; i <= end; i++) sum += arr[i]; // that's why the performance of a task has a time complexity of O(N)
+	for (int i = start; i <= end; i++) sum += arr[i]; // that's why the execurion of a task has a time complexity of O(N)
 	return sum;
 }

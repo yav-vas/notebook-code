@@ -51,7 +51,7 @@ void init(int len) {
 
 void edit(int pos, int val, int len) {
 	int diff = val - arr[pos];
-	for (int i = pos + 1; i <= len; i++) prefix[i] += diff; // that's why the performance of a task has a time complexity of O(N)
+	for (int i = pos + 1; i <= len; i++) prefix[i] += diff; // that's why the execution of a task has a time complexity of O(N)
 }
 
 int sum(int start, int end) {
