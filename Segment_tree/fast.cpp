@@ -40,7 +40,7 @@ int main() {
 		if (type == 's') {
 			cin >> start >> end;
 			//insert sum function
-			cout << sum(start, end, N) << endl;
+			cout << sum(start, end, N) << "\n";
 		}
 	}
 
