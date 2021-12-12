@@ -39,7 +39,6 @@ int main() {
 
 		if (type == 's') {
 			cin >> start >> end;
-			//insert sum function
 			cout << sum(start, end, N) << "\n";
 		}
 	}
@@ -59,8 +58,8 @@ void init(int N) {
 	for (int i = N - 1; i > 0; i--) st[i] = st[2 * i] + st[2 * i + 1];
 }
 
-void edit(int pos, int val, int len) {
-	pos = len + pos; // update the first position to edit
+void edit(int pos, int val, int N) {
+	pos = N + pos; // update the first position to edit
 	int diff = val - st[pos];
 
 	while (pos != 0){ // exit the loop when 1 / 2 = 0 is reached
@@ -69,9 +68,9 @@ void edit(int pos, int val, int len) {
 	}
 }
 
-int sum(int start, int end, int len) {
-	int l = len + start;
-	int r = len + end;
+int sum(int start, int end, int N) {
+	int l = N + start;
+	int r = N + end;
 	int sum = 0;
 
 	while (l != r) {
