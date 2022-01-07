@@ -14,6 +14,8 @@ void init(int, int);
 
 void edit(int, int, int, int, int, int);
 
+int sum(int, int, int, int, int, int);
+
 int main() {
 	int N;
 	cin >> N;
@@ -37,13 +39,17 @@ int main() {
 		if (type == 'e') {
 			cin >> index >> val;
 			edit(index, val, N, 0, N - 1, 1);
-			print(N);
+		}
+
+		if (type == 's') {
+			cin >> start >> end;
+			cout << sum(start, end, N, 0, N - 1, 1) << endl;
 		}
 	}
 	return 0;
 }
 
-void print(int N) {
+void print(int N) { // call it with N being the real or the entered size of the array for debugging purposes only
 	cout << "Segment tree:\n";
 	for (int i = 0; i < 2 * realSize(N); i++) cout << st[i] << " ";
 	cout << endl;
@@ -81,4 +87,20 @@ void edit(int pos, int val, int N, int l, int r, int i) {
 	else edit(pos, val, N, mid + 1, r, 2 * i + 1); // go to the right
 
 	st[i] = st[2 * i] + st[2 * i + 1];
+}
+
+int sum(int start, int end, int N, int l, int r, int i) {
+	if (start <= l and r <= end) { // situation 1.
+		return st[i];
+	}
+
+	if (r < start or l > end) { // situation 2.
+		return 0;
+	}
+
+	// if not situation 1. or 2. then situation 3.
+
+	int mid = (l + r) / 2;
+
+	return sum(start, end, N, l, mid, 2 * i) + sum(start, end, N, mid + 1, r, 2 * i + 1);
 }
