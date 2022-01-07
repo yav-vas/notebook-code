@@ -94,7 +94,7 @@ int sum(int start, int end, int N, int l, int r, int i) {
 		return st[i];
 	}
 
-	if (r < start or l > end) { // situation 2.
+	if (r < start or end < l) { // situation 2.
 		return 0;
 	}
 
