@@ -11,11 +11,11 @@ struct node {
 };
 
 node arr[MAX_N + 2];
-node st[2 * MAX_N + 2];
+node st[4 * MAX_N + 2];
 
 void print(int); // debugging function printing the segment tree
 
-int fill_seq(int); // returns the number of sequences
+int fill_seq(int); // reads the array and returns the number of sequences
 
 int realSize(int);
 
@@ -31,10 +31,14 @@ int main() {
 
 	while (n != 0) {
 		cin >> q;
+
+		// print(realSize(n));
 		
 		int num_seq = realSize(fill_seq(n)); // make num_seq equal to the real size used in the segment tree
 
 		init(1, num_seq, n);
+
+		// print(num_seq);
 
 		int start, end;
 
@@ -47,40 +51,45 @@ int main() {
 
 		cin >> n;
 	}
+
+	return 0;
 }
 
 void print(int num_seq) {
 	for (int i = 0; i <= 2 * num_seq; i++) {
-		cout << st[i].left << " " << st[i].right << " " << st[i].freq << endl;
+		cout << "i: " << i << " " << st[i].left << " " << st[i].right << " " << st[i].freq << endl;
+		if (st[i].left != 0 && st[i].freq == 0) cout << "PROBLEM!" << endl;
 	}
+
+	cout << "-----------------------------------------------------------\n";
+
+	for (int i = 0; i <= num_seq; i++) {
+		cout << "i: " << i << " " <<arr[i].left << " " << arr[i].right << " " << arr[i].freq << endl;
+	}
+
+	cout << "END printing the array data\n";
+
+	return;
 }
 
 int fill_seq(int n) {
 	int a, last_a, num_seq = 0, start_index = 1;
 
 	cin >> a;
-	for (int i = 2; i <= n; i++) {
+	for (int i = 2; i <= n + 1; i++) { // n + 1 in order to count the last sequence
 		last_a = a;
-		cin >> a;
+		if (i != n + 1) cin >> a; // don't read if after the end of the sequence
 
-		if (a != last_a) { // new sequence started
+		if (a != last_a or i == n + 1) { // new sequence started or the last ended
 			arr[num_seq].left = start_index;
 			arr[num_seq].right = i - 1;
 			arr[num_seq].freq = arr[num_seq].right - arr[num_seq].left + 1;
 
 			start_index = i;
 			num_seq++;
+			if(num_seq > n) cout << "STRANGE\n";
 		}
 	}
-
-	// count the last sequence
-
-	arr[num_seq].left = start_index;
-	arr[num_seq].right = n;
-	arr[num_seq].freq = arr[num_seq].right - arr[num_seq].left + 1;
-
-	start_index = n + 1;
-	num_seq++;
 
 	return num_seq;
 }
@@ -95,9 +104,18 @@ int realSize(int N) {
 
 void init(int i, int N, int n) { // N - number of sequences, n - length of the entered sequence
 	if (i >= N) { // leaf
+		if (i >= N + n) {
+			st[i].left = 0;
+			st[i].right = 0;
+			st[i].freq = 0;
+
+			return;
+		}
+		
 		st[i].left = arr[i - N].left;
 		st[i].right = arr[i - N].right;
 		st[i].freq = arr[i - N].freq;
+
 		return;
 	}
 
@@ -129,15 +147,17 @@ int freq(int start, int end, int N, int l, int r, int i) {
 }
 
 void empty_array(int N) {
-	for (int i = 0; i <= N + 2; i++) {
+	for (int i = 0; i <= 2 * N + 2; i++) {
 		arr[i].left = 0;
 		arr[i].right = 0;
 		arr[i].freq = 0;
 	}
 
-	for (int i = 0; i <= 2 * N + 2; i++) {
+	for (int i = 0; i <= 4 * N + 2; i++) {
 		st[i].left = 0;
 		st[i].right = 0;
 		st[i].freq = 0;
 	}
+
+	return;
 }
