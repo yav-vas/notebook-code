@@ -32,13 +32,9 @@ int main() {
 	while (n != 0) {
 		cin >> q;
 
-		// print(realSize(n));
-		
 		int num_seq = realSize(fill_seq(n)); // make num_seq equal to the real size used in the segment tree
 
 		init(1, num_seq, n);
-
-		// print(num_seq);
 
 		int start, end;
 
@@ -57,17 +53,8 @@ int main() {
 
 void print(int num_seq) {
 	for (int i = 0; i <= 2 * num_seq; i++) {
-		cout << "i: " << i << " " << st[i].left << " " << st[i].right << " " << st[i].freq << endl;
-		if (st[i].left != 0 && st[i].freq == 0) cout << "PROBLEM!" << endl;
+		cout << st[i].left << " " << st[i].right << " " << st[i].freq << endl;
 	}
-
-	cout << "-----------------------------------------------------------\n";
-
-	for (int i = 0; i <= num_seq; i++) {
-		cout << "i: " << i << " " <<arr[i].left << " " << arr[i].right << " " << arr[i].freq << endl;
-	}
-
-	cout << "END printing the array data\n";
 
 	return;
 }
@@ -87,7 +74,6 @@ int fill_seq(int n) {
 
 			start_index = i;
 			num_seq++;
-			if(num_seq > n) cout << "STRANGE\n";
 		}
 	}
 
@@ -104,7 +90,7 @@ int realSize(int N) {
 
 void init(int i, int N, int n) { // N - number of sequences, n - length of the entered sequence
 	if (i >= N) { // leaf
-		if (i >= N + n) {
+		if (i >= N + n) { // make sure dummy values are zeros and that you don't ask for arr[] index that is way too big
 			st[i].left = 0;
 			st[i].right = 0;
 			st[i].freq = 0;
