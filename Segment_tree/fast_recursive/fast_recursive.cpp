@@ -4,7 +4,7 @@ using namespace std;
 
 const int MAX_N = 1e6;
 int arr[MAX_N + 2];
-int st[2 * MAX_N + 2];
+int st[4 * MAX_N + 2];
 
 void print(int);
 
