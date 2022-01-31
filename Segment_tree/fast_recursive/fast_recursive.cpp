@@ -10,7 +10,7 @@ void print(int);
 
 int realSize(int); // nearest to N bigger power of two
 
-void init(int, int);
+void init(int, int, int);
 
 void edit(int, int, int, int, int, int);
 
@@ -22,9 +22,9 @@ int main() {
 
 	for (int i = 0; i < N; i++) cin >> arr[i];
 
-	N = realSize(N); // change N to the real size at the beginning; needed for building the segment tree and everything else
+	int real_N = realSize(N); // change N to the real size at the beginning; needed for building the segment tree and everything else
 
-	init(1, N); // start from root (index 1)
+	init(1, real_N, N); // start from root (index 1)
 
 	int M;
 	cin >> M;
@@ -38,12 +38,12 @@ int main() {
 
 		if (type == 'e') {
 			cin >> index >> val;
-			edit(index, val, N, 0, N - 1, 1);
+			edit(index, val, real_N, 0, real_N - 1, 1);
 		}
 
 		if (type == 's') {
 			cin >> start >> end;
-			cout << sum(start, end, N, 0, N - 1, 1) << endl;
+			cout << sum(start, end, real_N, 0, real_N - 1, 1) << endl;
 		}
 	}
 	return 0;
@@ -63,14 +63,19 @@ int realSize(int N) {
 	return ans;
 }
 
-void init(int i, int N) { // here N is the real size given from the function
+void init(int i, int N, int n) { // here N is the real size given from the function and n being the original length
 	if (i >= N) { // current node is leaf
+		if (i >= N + n) { // avoid getting out of the arr[] boundaries
+			st[i] = 0;
+			return;
+		}
+
 		st[i] = arr[i - N];
 		return;
 	}
 
-	init(2 * i, N);
-	init(2 * i + 1, N);
+	init(2 * i, N, n);
+	init(2 * i + 1, N, n);
 
 	st[i] = st[2 * i] + st[2 * i + 1];
 }
