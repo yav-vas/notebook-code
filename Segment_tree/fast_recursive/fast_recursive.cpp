@@ -65,7 +65,7 @@ int realSize(int N) {
 
 void init(int i, int N, int n) { // here N is the real size given from the function and n being the original length
 	if (i >= N) { // current node is leaf
-		if (i >= N + n) { // avoid getting out of the arr[] boundaries
+		if (i >= N + n) { // avoid getting out of the arr[] boundaries filling the dummy values as explained in 4.4.2.
 			st[i] = 0;
 			return;
 		}
