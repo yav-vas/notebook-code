@@ -17,7 +17,7 @@ int fill_seq(int); // reads the array and returns the number of sequences
 
 int realSize(int);
 
-void init(int, int, int);
+void init(int, int, int, int);
 
 int freq(int, int, int, int, int, int);
 
@@ -30,9 +30,10 @@ int main() {
 	while (n != 0) {
 		cin >> q;
 
-		int num_seq = realSize(fill_seq(n)); // make num_seq equal to the real size used in the segment tree
+		int old_num_seq = fill_seq(n); // not the real size
+		int num_seq = realSize(old_num_seq); // real size
 
-		init(1, num_seq, n);
+		init(1, num_seq, n, old_num_seq);
 
 		int start, end;
 
@@ -78,9 +79,9 @@ int realSize(int N) {
 	return ans;
 }
 
-void init(int i, int N, int n) { // N - number of sequences, n - length of the entered sequence
+void init(int i, int N, int n, int num_seq) { // N - number of sequences, n - length of the entered sequence, num_seq - real number of sequences
 	if (i >= N) { // leaf
-		if (i >= N + n) { // make sure dummy values are zeros and that you don't ask for arr[] index that is way too big
+		if (i >= N + num_seq) { // make sure dummy values are zeros and that you don't ask for arr[] index that is way too big
 			st[i].left = 0;
 			st[i].right = 0;
 			st[i].freq = 0;
@@ -95,8 +96,8 @@ void init(int i, int N, int n) { // N - number of sequences, n - length of the e
 		return;
 	}
 
-	init(2 * i, N, n);
-	init(2 * i + 1, N, n);
+	init(2 * i, N, n, num_seq);
+	init(2 * i + 1, N, n, num_seq);
 
 	st[i].left = st[2 * i].left;
 	st[i].right = st[2 * i + 1].right;
