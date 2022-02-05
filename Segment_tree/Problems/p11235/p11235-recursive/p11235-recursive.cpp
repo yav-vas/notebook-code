@@ -124,13 +124,13 @@ int freq(int start, int end, int N, int l, int r, int i) {
 }
 
 void empty_array(int N) {
-	for (int i = 0; i <= 2 * N + 2; i++) {
+	for (int i = 0; i < N + 2; i++) {
 		arr[i].left = 0;
 		arr[i].right = 0;
 		arr[i].freq = 0;
 	}
 
-	for (int i = 0; i <= 4 * N + 2; i++) {
+	for (int i = 0; i < 4 * N + 2; i++) {
 		st[i].left = 0;
 		st[i].right = 0;
 		st[i].freq = 0;
