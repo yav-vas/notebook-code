@@ -13,8 +13,6 @@ struct node {
 node arr[MAX_N + 2];
 node st[4 * MAX_N + 2];
 
-void print(int); // debugging function printing the segment tree
-
 int fill_seq(int); // reads the array and returns the number of sequences
 
 int realSize(int);
@@ -49,14 +47,6 @@ int main() {
 	}
 
 	return 0;
-}
-
-void print(int num_seq) {
-	for (int i = 0; i <= 2 * num_seq; i++) {
-		cout << st[i].left << " " << st[i].right << " " << st[i].freq << endl;
-	}
-
-	return;
 }
 
 int fill_seq(int n) {
