@@ -42,7 +42,7 @@ int main() {
 			cout << freq(start, end, num_seq, st[1].left, st[1].right, 1) << endl;
 		}
 		
-		empty_array(n);
+		empty_array(old_num_seq);
 
 		cin >> n;
 	}
