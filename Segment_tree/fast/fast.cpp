@@ -73,7 +73,7 @@ int sum(int start, int end, int N) {
 	int r = N + end;
 	int sum = 0;
 
-	while (l != r) {
+	while (l < r) {
 		if (l % 2 == 1) {
 			sum += st[l];
 			l++;
@@ -86,7 +86,9 @@ int sum(int start, int end, int N) {
 		r /= 2; // move up -> only O(logn) time complexity
 	}
 
-	sum += st[l]; //does not matter whether l or r - they are equal
+	if (l > r) return sum; // no more info for collection
+
+	sum += st[l]; // does not matter whether l or r - they are equal
 	
 	return sum;
 }
