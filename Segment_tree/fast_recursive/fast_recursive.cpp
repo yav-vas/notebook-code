@@ -43,7 +43,7 @@ int main() {
 
 		if (type == 's') {
 			cin >> start >> end;
-			cout << sum(start, end, real_N, 0, real_N - 1, 1) << endl;
+			cout << sum(start, end, real_N, 0, real_N - 1, 1) << '\n';
 		}
 	}
 	return 0;

@@ -39,7 +39,7 @@ int main() {
 
 		if (type == 's') {
 			cin >> start >> end;
-			cout << sum(start, end, N) << "\n";
+			cout << sum(start, end, N) << '\n';
 		}
 	}
 

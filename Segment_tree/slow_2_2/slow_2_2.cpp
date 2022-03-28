@@ -38,7 +38,7 @@ int main() {
 
 		if (type == 's') {
 			cin >> start >> end;
-			cout << sum(start, end) << endl;
+			cout << sum(start, end) << '\n';
 		}
 	}
 
