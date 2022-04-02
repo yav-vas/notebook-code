@@ -5,3 +5,5 @@
 *.in
 *.ans
 *.sol
+*.testgen
+Testing_environment/
