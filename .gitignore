@@ -5,5 +5,5 @@
 *.in
 *.ans
 *.sol
-*.testgen
+*.testgen.cpp
 Testing_environment/
