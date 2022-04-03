@@ -54,6 +54,7 @@ void init(int len) {
 
 void edit(int pos, int val, int len) {
 	int diff = val - arr[pos];
+	arr[pos] = val;
 	for (int i = pos + 1; i <= len; i += (i & (-i))) ft[i] += diff;
 }
 
